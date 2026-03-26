@@ -19,19 +19,29 @@ apiClient.interceptors.request.use((config) => {
   return config
 })
 
-// ── Response interceptor: silent refresh on 401 ──────────────────────
-let isRefreshing = false
-let failedQueue: {
-  resolve: (token: string) => void
-  reject: (err: unknown) => void
-}[] = []
+let refreshPromise: Promise<string> | null = null
 
-function processQueue(error: unknown, token: string | null) {
-  failedQueue.forEach(({ resolve, reject }) => {
-    if (token) resolve(token)
-    else reject(error)
-  })
-  failedQueue = []
+async function getNewToken(): Promise<string> {
+  if (refreshPromise) return refreshPromise
+
+  refreshPromise = axios
+    .get<{ accessToken: string }>(`${baseURL}/auth/refresh-token`, {
+      withCredentials: true,
+    })
+    .then((res) => {
+      const newToken = res.data.accessToken
+      useAuthStore.getState().setAccessToken(newToken)
+      return newToken
+    })
+    .catch((err) => {
+      useAuthStore.getState().reset()
+      throw err
+    })
+    .finally(() => {
+      refreshPromise = null
+    })
+
+  return refreshPromise
 }
 
 apiClient.interceptors.response.use(
@@ -41,43 +51,20 @@ apiClient.interceptors.response.use(
       _retry?: boolean
     }
 
-    // Only attempt refresh for 401 errors that haven't been retried
-    // and that aren't the refresh-token endpoint itself
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
       !originalRequest.url?.includes('/auth/refresh-token')
     ) {
-      // If a refresh is already in progress, queue this request
-      if (isRefreshing) {
-        return new Promise<string>((resolve, reject) => {
-          failedQueue.push({ resolve, reject })
-        }).then((token) => {
-          originalRequest.headers.Authorization = `Bearer ${token}`
-          return apiClient(originalRequest)
-        })
-      }
-
       originalRequest._retry = true
-      isRefreshing = true
 
       try {
-        const { data } = await axios.get(`${baseURL}/auth/refresh-token`, {
-          withCredentials: true,
-        })
-
-        const newToken: string = data.accessToken
-        useAuthStore.getState().setAccessToken(newToken)
-        processQueue(null, newToken)
+        const newToken = await getNewToken()
 
         originalRequest.headers.Authorization = `Bearer ${newToken}`
         return apiClient(originalRequest)
-      } catch (refreshError) {
-        processQueue(refreshError, null)
-        useAuthStore.getState().reset()
-        return Promise.reject(refreshError)
-      } finally {
-        isRefreshing = false
+      } catch (err) {
+        return Promise.reject(err)
       }
     }
 
@@ -85,7 +72,6 @@ apiClient.interceptors.response.use(
   }
 )
 
-// ── Types ─────────────────────────────────────────────────────────────
 interface LoginData {
   email: string
   password: string
