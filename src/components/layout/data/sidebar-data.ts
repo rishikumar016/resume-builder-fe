@@ -61,20 +61,21 @@ export const sidebarData: SidebarData = {
           items: [
             {
               title: 'My Resume',
-              url: '/clerk/sign-in',
+              url: '/resume/my-resume',
             },
             {
               title: 'Create Resume',
-              url: '/clerk/sign-up',
+              url: '/resume/create',
             },
             {
               title: 'Templates',
-              url: '/clerk/user-management',
+              url: '/resume/templates',
             },
           ],
         },
       ],
     },
+
     {
       title: 'Pages',
       items: [

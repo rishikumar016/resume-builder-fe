@@ -41,7 +41,7 @@ export function Dashboard() {
 
             <div className='mt-12 grid gap-6 sm:grid-cols-2'>
               <Link
-                to='/templates'
+                to='/resume/templates'
                 className='flex flex-col rounded-2xl bg-surface-container-lowest p-8 shadow-ambient transition-transform hover:scale-[1.02]'
               >
                 <div className='w-fit rounded-xl bg-surface-container-low p-3 text-primary-container'>

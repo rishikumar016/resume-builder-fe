@@ -11,11 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedTemplatesRouteImport } from './routes/_authenticated/templates'
 import { Route as AuthenticatedTailoringRouteImport } from './routes/_authenticated/tailoring'
 import { Route as AuthenticatedProcessingRouteImport } from './routes/_authenticated/processing'
 import { Route as AuthenticatedPersonalizationRouteImport } from './routes/_authenticated/personalization'
-import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedLatexEditorRouteImport } from './routes/_authenticated/latex-editor'
 import { Route as AuthenticatedJobsRouteImport } from './routes/_authenticated/jobs'
 import { Route as AuthenticatedInterviewPrepRouteImport } from './routes/_authenticated/interview-prep'
@@ -37,6 +35,9 @@ import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
+import { Route as AuthenticatedResumeTemplatesRouteImport } from './routes/_authenticated/resume/templates'
+import { Route as AuthenticatedResumeMyResumeRouteImport } from './routes/_authenticated/resume/my-resume'
+import { Route as AuthenticatedResumeCreateRouteImport } from './routes/_authenticated/resume/create'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -47,11 +48,6 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedTemplatesRoute = AuthenticatedTemplatesRouteImport.update({
-  id: '/templates',
-  path: '/templates',
-  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTailoringRoute = AuthenticatedTailoringRouteImport.update({
   id: '/tailoring',
@@ -69,11 +65,6 @@ const AuthenticatedPersonalizationRoute =
     path: '/personalization',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
-  id: '/onboarding',
-  path: '/onboarding',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedLatexEditorRoute =
   AuthenticatedLatexEditorRouteImport.update({
     id: '/latex-editor',
@@ -188,6 +179,24 @@ const AuthenticatedSettingsAccountRoute =
     path: '/account',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
+const AuthenticatedResumeTemplatesRoute =
+  AuthenticatedResumeTemplatesRouteImport.update({
+    id: '/resume/templates',
+    path: '/resume/templates',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedResumeMyResumeRoute =
+  AuthenticatedResumeMyResumeRouteImport.update({
+    id: '/resume/my-resume',
+    path: '/resume/my-resume',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedResumeCreateRoute =
+  AuthenticatedResumeCreateRouteImport.update({
+    id: '/resume/create',
+    path: '/resume/create',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedErrorsErrorRoute =
   AuthenticatedErrorsErrorRouteImport.update({
     id: '/errors/$error',
@@ -212,12 +221,13 @@ export interface FileRoutesByFullPath {
   '/interview-prep': typeof AuthenticatedInterviewPrepRoute
   '/jobs': typeof AuthenticatedJobsRoute
   '/latex-editor': typeof AuthenticatedLatexEditorRoute
-  '/onboarding': typeof AuthenticatedOnboardingRoute
   '/personalization': typeof AuthenticatedPersonalizationRoute
   '/processing': typeof AuthenticatedProcessingRoute
   '/tailoring': typeof AuthenticatedTailoringRoute
-  '/templates': typeof AuthenticatedTemplatesRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/resume/create': typeof AuthenticatedResumeCreateRoute
+  '/resume/my-resume': typeof AuthenticatedResumeMyResumeRoute
+  '/resume/templates': typeof AuthenticatedResumeTemplatesRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -241,12 +251,13 @@ export interface FileRoutesByTo {
   '/interview-prep': typeof AuthenticatedInterviewPrepRoute
   '/jobs': typeof AuthenticatedJobsRoute
   '/latex-editor': typeof AuthenticatedLatexEditorRoute
-  '/onboarding': typeof AuthenticatedOnboardingRoute
   '/personalization': typeof AuthenticatedPersonalizationRoute
   '/processing': typeof AuthenticatedProcessingRoute
   '/tailoring': typeof AuthenticatedTailoringRoute
-  '/templates': typeof AuthenticatedTemplatesRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/resume/create': typeof AuthenticatedResumeCreateRoute
+  '/resume/my-resume': typeof AuthenticatedResumeMyResumeRoute
+  '/resume/templates': typeof AuthenticatedResumeTemplatesRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -273,12 +284,13 @@ export interface FileRoutesById {
   '/_authenticated/interview-prep': typeof AuthenticatedInterviewPrepRoute
   '/_authenticated/jobs': typeof AuthenticatedJobsRoute
   '/_authenticated/latex-editor': typeof AuthenticatedLatexEditorRoute
-  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/personalization': typeof AuthenticatedPersonalizationRoute
   '/_authenticated/processing': typeof AuthenticatedProcessingRoute
   '/_authenticated/tailoring': typeof AuthenticatedTailoringRoute
-  '/_authenticated/templates': typeof AuthenticatedTemplatesRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/_authenticated/resume/create': typeof AuthenticatedResumeCreateRoute
+  '/_authenticated/resume/my-resume': typeof AuthenticatedResumeMyResumeRoute
+  '/_authenticated/resume/templates': typeof AuthenticatedResumeTemplatesRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -305,12 +317,13 @@ export interface FileRouteTypes {
     | '/interview-prep'
     | '/jobs'
     | '/latex-editor'
-    | '/onboarding'
     | '/personalization'
     | '/processing'
     | '/tailoring'
-    | '/templates'
     | '/errors/$error'
+    | '/resume/create'
+    | '/resume/my-resume'
+    | '/resume/templates'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -334,12 +347,13 @@ export interface FileRouteTypes {
     | '/interview-prep'
     | '/jobs'
     | '/latex-editor'
-    | '/onboarding'
     | '/personalization'
     | '/processing'
     | '/tailoring'
-    | '/templates'
     | '/errors/$error'
+    | '/resume/create'
+    | '/resume/my-resume'
+    | '/resume/templates'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -365,12 +379,13 @@ export interface FileRouteTypes {
     | '/_authenticated/interview-prep'
     | '/_authenticated/jobs'
     | '/_authenticated/latex-editor'
-    | '/_authenticated/onboarding'
     | '/_authenticated/personalization'
     | '/_authenticated/processing'
     | '/_authenticated/tailoring'
-    | '/_authenticated/templates'
     | '/_authenticated/errors/$error'
+    | '/_authenticated/resume/create'
+    | '/_authenticated/resume/my-resume'
+    | '/_authenticated/resume/templates'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
@@ -409,13 +424,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/templates': {
-      id: '/_authenticated/templates'
-      path: '/templates'
-      fullPath: '/templates'
-      preLoaderRoute: typeof AuthenticatedTemplatesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/tailoring': {
       id: '/_authenticated/tailoring'
       path: '/tailoring'
@@ -435,13 +443,6 @@ declare module '@tanstack/react-router' {
       path: '/personalization'
       fullPath: '/personalization'
       preLoaderRoute: typeof AuthenticatedPersonalizationRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/onboarding': {
-      id: '/_authenticated/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/latex-editor': {
@@ -591,6 +592,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
+    '/_authenticated/resume/templates': {
+      id: '/_authenticated/resume/templates'
+      path: '/resume/templates'
+      fullPath: '/resume/templates'
+      preLoaderRoute: typeof AuthenticatedResumeTemplatesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resume/my-resume': {
+      id: '/_authenticated/resume/my-resume'
+      path: '/resume/my-resume'
+      fullPath: '/resume/my-resume'
+      preLoaderRoute: typeof AuthenticatedResumeMyResumeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resume/create': {
+      id: '/_authenticated/resume/create'
+      path: '/resume/create'
+      fullPath: '/resume/create'
+      preLoaderRoute: typeof AuthenticatedResumeCreateRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/errors/$error': {
       id: '/_authenticated/errors/$error'
       path: '/errors/$error'
@@ -631,12 +653,13 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedInterviewPrepRoute: typeof AuthenticatedInterviewPrepRoute
   AuthenticatedJobsRoute: typeof AuthenticatedJobsRoute
   AuthenticatedLatexEditorRoute: typeof AuthenticatedLatexEditorRoute
-  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedPersonalizationRoute: typeof AuthenticatedPersonalizationRoute
   AuthenticatedProcessingRoute: typeof AuthenticatedProcessingRoute
   AuthenticatedTailoringRoute: typeof AuthenticatedTailoringRoute
-  AuthenticatedTemplatesRoute: typeof AuthenticatedTemplatesRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
+  AuthenticatedResumeCreateRoute: typeof AuthenticatedResumeCreateRoute
+  AuthenticatedResumeMyResumeRoute: typeof AuthenticatedResumeMyResumeRoute
+  AuthenticatedResumeTemplatesRoute: typeof AuthenticatedResumeTemplatesRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
 }
 
@@ -647,12 +670,13 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedInterviewPrepRoute: AuthenticatedInterviewPrepRoute,
   AuthenticatedJobsRoute: AuthenticatedJobsRoute,
   AuthenticatedLatexEditorRoute: AuthenticatedLatexEditorRoute,
-  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedPersonalizationRoute: AuthenticatedPersonalizationRoute,
   AuthenticatedProcessingRoute: AuthenticatedProcessingRoute,
   AuthenticatedTailoringRoute: AuthenticatedTailoringRoute,
-  AuthenticatedTemplatesRoute: AuthenticatedTemplatesRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
+  AuthenticatedResumeCreateRoute: AuthenticatedResumeCreateRoute,
+  AuthenticatedResumeMyResumeRoute: AuthenticatedResumeMyResumeRoute,
+  AuthenticatedResumeTemplatesRoute: AuthenticatedResumeTemplatesRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
 }
 
