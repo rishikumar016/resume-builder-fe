@@ -1,35 +1,8 @@
 import * as React from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import {
-  FileText,
-  Cpu,
-  Eye,
-  LayoutTemplate,
-  ShieldCheck,
-  CheckCircle2,
-  Check,
-} from 'lucide-react'
+import { FileText, Cpu, Eye, CheckCircle2, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { UploadModal } from '@/components/upload-modal'
-
-// Simple custom Twitter (X) icon component
-const Twitter = ({ className }: { className?: string }) => (
-  <svg
-    className={className}
-    xmlns='http://www.w3.org/2000/svg'
-    width='24'
-    height='24'
-    viewBox='0 0 24 24'
-    fill='none'
-    stroke='currentColor'
-    strokeWidth='2'
-    strokeLinecap='round'
-    strokeLinejoin='round'
-  >
-    <path d='M4 4l11.733 16h4.267l-11.733 -16z' />
-    <path d='M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772' />
-  </svg>
-)
 
 export const Route = createFileRoute('/')({
   component: LandingPage,
@@ -42,36 +15,43 @@ function LandingPage() {
     <div className='min-h-screen overflow-x-hidden bg-background font-sans text-foreground selection:bg-primary/30'>
       {/* Header */}
       <header className='mx-auto flex max-w-7xl items-center justify-between px-8 py-6'>
-        <div className='flex items-center gap-2 text-xl font-bold'>
-          <div className='text-primary'>
-            <FileText className='size-5' />
+        <div className='flex items-center gap-2 font-bold'>
+          <div className='flex size-6 items-center justify-center rounded bg-foreground text-background'>
+            <span className='text-xs'>A</span>
           </div>
-          <span className='text-foreground'>The Digital Tailor</span>
+          <span className='text-sm text-foreground'>The Digital Tailor</span>
         </div>
-        <nav className='hidden gap-8 text-sm font-medium text-muted-foreground md:flex'>
+        <nav className='hidden gap-8 text-[11px] font-semibold tracking-wide uppercase md:flex'>
           <a
-            href='#features'
+            href='#builder'
             className='border-b-2 border-primary pb-1 text-primary transition-colors hover:text-primary/80'
           >
-            Features
+            Resume Builder
           </a>
           <a
             href='#templates'
-            className='border-b-2 border-transparent pb-1 transition-colors hover:text-foreground'
+            className='border-b-2 border-transparent pb-1 text-muted-foreground transition-colors hover:text-foreground'
           >
             Templates
           </a>
           <a
-            href='#pricing'
-            className='border-b-2 border-transparent pb-1 transition-colors hover:text-foreground'
+            href='#resources'
+            className='border-b-2 border-transparent pb-1 text-muted-foreground transition-colors hover:text-foreground'
           >
-            Pricing
+            Resources
           </a>
         </nav>
         <div className='flex items-center gap-4'>
           <Button
             asChild
-            className='bg-primary px-6 font-bold text-primary-foreground hover:bg-primary/90'
+            variant='ghost'
+            className='hidden text-xs font-bold text-foreground opacity-80 hover:bg-transparent hover:text-primary md:inline-flex'
+          >
+            <Link to='/sign-in'>Login</Link>
+          </Button>
+          <Button
+            asChild
+            className='h-8 bg-primary px-6 text-xs font-bold text-primary-foreground shadow-ambient hover:bg-primary/90'
           >
             <Link to='/sign-in'>Sign Up</Link>
           </Button>
@@ -79,324 +59,359 @@ function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <main className='mx-auto grid max-w-7xl items-center gap-16 px-8 pt-20 pb-20 lg:grid-cols-2'>
-        <div className='space-y-8'>
-          <div className='inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1.5 text-[10px] font-bold tracking-widest text-muted-foreground uppercase'>
-            <Cpu className='size-3 text-tertiary' /> AI-DRIVEN PRECISION
+      <main className='mx-auto flex max-w-7xl flex-col items-center justify-between gap-16 px-8 py-20 lg:flex-row'>
+        <div className='flex-1 space-y-6'>
+          <div className='inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[10px] font-bold text-primary'>
+            <Sparkles className='size-3 text-primary' /> New: AI-Powered Career
+            Pathfinding
           </div>
-          <h1 className='text-6xl leading-[1] font-extrabold tracking-tight text-foreground md:text-7xl lg:text-[5.5rem]'>
-            Bespoke Career <br />
-            <span className='text-primary'>Architecture.</span>
+          <h1 className='text-5xl leading-[1.1] font-extrabold tracking-tight text-foreground md:text-6xl lg:text-[4.5rem]'>
+            Bespoke <br />
+            <span className='bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent'>
+              Career Architecture
+            </span>
           </h1>
-          <p className='max-w-md text-lg leading-relaxed text-muted-foreground'>
+          <p className='max-w-md text-sm leading-relaxed text-muted-foreground md:text-base'>
             Precision-engineered resumes and career strategies tailored to your
             unique professional DNA. Stop applying. Start being selected.
           </p>
           <div className='flex flex-wrap items-center gap-4 pt-4'>
             <Button
               asChild
-              className='h-14 rounded bg-primary px-8 text-base font-bold text-primary-foreground shadow-ambient hover:bg-primary/90'
+              className='h-12 w-full rounded bg-primary px-8 text-sm font-bold text-primary-foreground shadow-ambient hover:bg-primary/90 md:w-auto'
             >
               <Link
                 to='/sign-in'
                 search={(prev) => ({ ...prev, intent: 'new' })}
               >
-                Build My Resume <span className='ml-2 font-normal'>→</span>
+                Build My Masterpiece ➔
               </Link>
             </Button>
             <Button
-              onClick={() => setIsUploadModalOpen(true)}
               variant='outline'
-              className='h-14 rounded border-border bg-secondary px-8 text-base font-bold text-foreground transition-colors hover:bg-secondary/80'
+              onClick={() => setIsUploadModalOpen(true)}
+              className='h-12 w-full rounded border border-primary/20 bg-primary/5 px-8 text-sm font-bold text-primary transition-colors hover:bg-primary/10 md:w-auto'
             >
-              Import Resume
+              View Templates
             </Button>
+          </div>
+          <div className='flex items-center gap-4 pt-6'>
+            <div className='flex -space-x-3'>
+              <div className='size-9 rounded border-2 border-background bg-teal-800' />
+              <div className='size-9 rounded border-2 border-background bg-slate-700' />
+              <div className='size-9 rounded border-2 border-background bg-cyan-900' />
+            </div>
+            <div className='text-[10px]'>
+              <p className='font-bold text-foreground'>
+                Join 45,000+ professionals
+              </p>
+              <p className='text-muted-foreground'>
+                Trusted by leaders at Google, Meta, and Tesla
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Hero Visual Mock */}
-        <div className='relative w-full max-w-lg lg:ml-auto'>
-          <div className='absolute inset-0 rounded-full bg-primary/5 blur-[120px]'></div>
-          <div className='relative flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-2xl'>
-            {/* Window controls */}
-            <div className='flex items-center justify-between border-b border-border bg-card px-4 py-3'>
-              <div className='flex gap-2'>
-                <div className='size-2.5 rounded-full bg-destructive'></div>
-                <div className='size-2.5 rounded-full bg-amber-500'></div>
-                <div className='size-2.5 rounded-full bg-green-500'></div>
-              </div>
-              <div className='font-mono text-[9px] tracking-widest text-muted-foreground uppercase'>
-                banana_vp_resume.pdf
-              </div>
-              <div className='w-10'></div> {/* Spacer */}
+        <div className='relative w-full max-w-md lg:w-[460px]'>
+          <div className='absolute -inset-10 rounded-full bg-primary/20 blur-[100px]'></div>
+          {/* Abstract Mockup Window - Dark by default as per UI Reference */}
+          <div className='relative flex h-[380px] w-full flex-col overflow-hidden rounded-xl border border-white/10 bg-[#1e232b] shadow-2xl'>
+            <div className='flex items-center border-b border-white/5 bg-[#181c22] px-4 py-3'>
+              <div className='h-2 w-32 rounded bg-white/10'></div>
             </div>
-            {/* Document mock area */}
-            <div className='relative flex h-[350px] flex-row gap-6 overflow-hidden bg-surface-container-lowest p-6'>
-              {/* Sidebar styling */}
-              <div className='relative z-10 flex w-[140px] flex-col gap-4'>
-                {/* Tailor suggestion block */}
-                <div className='mt-10 rounded-lg border border-primary/30 bg-surface-container-low p-3 shadow-lg'>
-                  <div className='mb-2 flex items-center gap-2'>
-                    <ShieldCheck className='size-3 text-primary' />
-                    <span className='text-[8px] font-bold tracking-wider text-primary uppercase'>
-                      Tailor Suggestion
-                    </span>
+            <div className='flex flex-1 p-6'>
+              <div className='flex w-full gap-4'>
+                {/* Sidebar */}
+                <div className='flex w-1/3 flex-col gap-3 rounded border border-white/5 bg-white/5 p-3'>
+                  <div className='h-2 w-20 rounded bg-white/20'></div>
+                  <div className='space-y-1.5 pt-2'>
+                    <div className='h-1 w-full rounded bg-white/10'></div>
+                    <div className='h-1 w-full rounded bg-white/10'></div>
+                    <div className='h-1 w-5/6 rounded bg-white/10'></div>
                   </div>
-                  <p className='text-[9px] leading-relaxed text-muted-foreground'>
-                    Swap "Managed team" with "Orchestrated cross-functional
-                    squads to scale operations by 300%".
-                  </p>
                 </div>
-                <div className='mt-auto h-6 w-full rounded bg-secondary'></div>
-                <div className='h-6 w-full rounded bg-secondary'></div>
-              </div>
-
-              {/* PDF Document body */}
-              <div className='relative flex-1 rounded bg-card p-6 text-card-foreground shadow-sm'>
-                <h2 className='mb-3 border-b border-border pb-2 font-serif text-xl tracking-widest uppercase'>
-                  Alex Rivera
-                </h2>
-                <div className='mb-6 flex justify-between font-sans text-[7px] tracking-wider text-muted-foreground uppercase'>
-                  <span>San Francisco, CA</span>
-                  <span>arivera@example.com</span>
-                </div>
-                <div className='space-y-3'>
-                  <div className='h-1.5 w-full rounded bg-surface-container-high'></div>
-                  <div className='h-1.5 w-[90%] rounded bg-surface-container-high'></div>
-                  <div className='h-1.5 w-[95%] rounded bg-surface-container-high'></div>
-                  <div className='mt-6 h-1.5 w-[80%] rounded bg-surface-container-high'></div>
-                  <div className='h-1.5 w-full rounded bg-surface-container-high'></div>
-                  <div className='h-1.5 w-[85%] rounded bg-surface-container-high'></div>
+                {/* Main Table Content */}
+                <div className='flex-1 rounded border border-white/5 bg-white/5 p-4'>
+                  <div className='mb-3 flex justify-between border-b border-white/5 pb-2'>
+                    <div className='h-2 w-16 rounded bg-white/20'></div>
+                    <div className='h-2 w-16 rounded bg-white/20'></div>
+                  </div>
+                  <div className='space-y-2'>
+                    {[...Array(6)].map((_, i) => (
+                      <div
+                        key={i}
+                        className='flex flex-wrap items-center justify-between gap-2 px-1 py-1.5'
+                      >
+                        <div className='h-1 w-10 rounded bg-white/20'></div>
+                        <div className='flex gap-1'>
+                          <div className='size-1.5 rounded-sm bg-orange-400'></div>
+                          <div className='size-1.5 rounded-sm bg-cyan-400'></div>
+                          <div className='size-1.5 rounded-sm bg-purple-400'></div>
+                        </div>
+                        <div className='h-1 w-8 rounded bg-white/10'></div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Absolute overlay elements */}
+            <div className='absolute top-10 left-10 p-2'>
+              <div className='h-2 w-24 rounded bg-white/30'></div>
+            </div>
+          </div>
+
+          {/* Floating suggestion card */}
+          <div className='absolute -bottom-6 -left-10 z-10 w-[240px] rounded-lg border border-border bg-card p-4 shadow-xl'>
+            <div className='mb-2 flex items-center gap-2'>
+              <div className='flex size-5 items-center justify-center rounded bg-primary text-primary-foreground'>
+                <Cpu className='size-3' />
+              </div>
+              <span className='text-[9px] font-bold tracking-widest text-foreground uppercase'>
+                Digital Tailor AI
+              </span>
+            </div>
+            <p className='text-xs leading-relaxed text-muted-foreground'>
+              "Your technical skills segment is 42% more effective with the new
+              layout."
+            </p>
           </div>
         </div>
       </main>
 
       {/* Brands Section */}
-      <section className='mt-12 border-y border-border bg-muted py-12'>
+      <section className='mt-10 border-y border-border bg-secondary/50 py-16'>
         <div className='mx-auto max-w-7xl px-8 text-center'>
-          <p className='mb-8 text-[10px] font-bold tracking-[0.2em] text-muted-foreground uppercase'>
-            Our candidates have been architected into leadership roles at
+          <p className='mb-10 text-[10px] font-bold tracking-widest text-muted-foreground uppercase'>
+            Building success with talent from
           </p>
-          <div className='flex flex-wrap items-center justify-center gap-12 opacity-50 grayscale md:gap-24'>
-            {/* Simple text logos for replication */}
-            <span className='font-sans text-xl font-bold tracking-tight text-foreground opacity-80 md:text-2xl'>
-              APPLE
-            </span>
-            <span className='font-sans text-xl font-bold tracking-tight text-foreground opacity-80 md:text-2xl'>
-              NVIDIA
-            </span>
-            <span className='font-sans text-xl font-bold tracking-tight text-foreground opacity-80 md:text-2xl'>
-              STRIPE
-            </span>
-            <span className='font-sans text-xl font-bold tracking-tight text-foreground opacity-80 md:text-2xl'>
-              NETFLIX
-            </span>
-            <span className='font-sans text-xl font-bold tracking-tight text-foreground opacity-80 md:text-2xl'>
-              AIRBNB
-            </span>
+          <div className='flex flex-wrap items-center justify-center gap-12 opacity-40 grayscale md:gap-20'>
+            <div className='h-6 w-12 bg-muted-foreground/30'></div>
+            <div className='h-6 w-12 bg-muted-foreground/30'></div>
+            <div className='h-6 w-16 bg-muted-foreground/30'></div>
+            <div className='h-6 w-10 bg-muted-foreground/30'></div>
+            <div className='h-6 w-12 bg-muted-foreground/30'></div>
           </div>
         </div>
       </section>
 
       {/* Feature Section */}
-      <section id='features' className='py-32'>
-        <div className='mx-auto max-w-7xl px-8'>
-          <div className='mb-16'>
-            <h2 className='mb-4 text-4xl font-extrabold md:text-5xl'>
-              The Science of Selection.
-            </h2>
-            <p className='max-w-2xl text-lg leading-relaxed text-muted-foreground'>
-              We don't just fill templates. We engineer psychological triggers
-              that command attention from both human recruiters and digital
-              gatekeepers.
+      <section id='features' className='mx-auto max-w-7xl px-8 py-32'>
+        <div className='mb-16'>
+          <h2 className='mb-4 text-4xl font-extrabold md:text-5xl'>
+            Architected for{' '}
+            <span className='font-serif text-primary italic'>Impact</span>
+          </h2>
+          <p className='max-w-xl text-sm leading-relaxed text-muted-foreground'>
+            Traditional builders fill boxes. We engineer visual hierarchies that
+            command attention in under 6 seconds.
+          </p>
+        </div>
+
+        <div className='grid grid-cols-1 gap-6 md:grid-cols-4'>
+          {/* ATS Parsing Card */}
+          <div className='flex flex-col justify-between overflow-hidden rounded-[2rem] border border-border bg-secondary p-8 md:col-span-3'>
+            <div>
+              <div className='mb-6 p-1'>
+                <FileText className='size-6 text-primary' />
+              </div>
+              <h3 className='text-lg font-bold text-foreground'>
+                ATS-Infallible Parsing
+              </h3>
+              <p className='mt-3 max-w-xs text-xs leading-relaxed text-muted-foreground'>
+                Our algorithms don't just mimic keywords; they mirror the
+                structural expectations of modern talent management systems.
+              </p>
+            </div>
+            <div className='relative mt-8 flex h-20 w-full flex-col justify-center gap-2 rounded-xl border border-border bg-card px-6 opacity-50 shadow-sm md:w-3/4'>
+              {/* Abstract scanning laser gradient */}
+              <div className='absolute top-0 right-0 h-full w-1/3 bg-gradient-to-r from-transparent to-primary/10'></div>
+              <div className='h-2 w-full rounded bg-border'></div>
+              <div className='h-2 w-5/6 rounded bg-border'></div>
+              <div className='h-2 w-4/6 rounded bg-border'></div>
+            </div>
+          </div>
+
+          {/* 94% Success Rate Card */}
+          <div className='flex flex-col justify-center rounded-[2rem] bg-gradient-to-br from-tertiary to-primary p-8 text-primary-foreground shadow-ambient md:col-span-1 md:row-span-2'>
+            <div className='text-5xl font-black'>94%</div>
+            <div className='mt-2 text-[9px] font-bold tracking-widest uppercase opacity-90'>
+              Interview Success Rate
+            </div>
+            <p className='mt-8 text-xs leading-relaxed font-medium opacity-100'>
+              Users who leverage our AI-tailoring report a significant increase
+              in recruiter callbacks within 7 days.
             </p>
           </div>
 
-          <div className='grid gap-6 md:grid-cols-3'>
-            <div className='rounded-2xl border border-border bg-card p-8'>
-              <div className='mb-6 w-fit rounded-xl bg-secondary p-3'>
-                <LayoutTemplate className='size-5 text-primary' />
+          {/* Psychological Hierarchy Card */}
+          <div className='rounded-[2rem] border border-border bg-card p-8 md:col-span-1'>
+            <div className='mb-6'>
+              <div className='inline-flex rounded-full bg-primary/10 p-2'>
+                <div className='size-3 rounded-full bg-primary'></div>
               </div>
-              <h3 className='mb-3 text-xl font-bold'>Architected for Impact</h3>
-              <p className='text-sm leading-relaxed text-muted-foreground'>
-                Recruiters spend only 6 seconds on initial scans. Our layouts
-                are mathematically optimized to deliver your peak value
-                propositions instantly.
-              </p>
             </div>
+            <h3 className='mb-2 text-sm font-bold text-foreground'>
+              Psychological Hierarchy
+            </h3>
+            <p className='text-xs leading-relaxed text-muted-foreground'>
+              Layouts designed around F-pattern scanning behaviors to ensure
+              your key accomplishments are seen first.
+            </p>
+          </div>
 
-            <div className='rounded-2xl border border-border bg-card p-8'>
-              <div className='mb-6 w-fit rounded-xl bg-tertiary/10 p-3'>
-                <Cpu className='size-5 text-tertiary' />
-              </div>
-              <h3 className='mb-3 text-xl font-bold'>ATS-Infallible Parsing</h3>
-              <p className='text-sm leading-relaxed text-muted-foreground'>
-                Most resumes die in the database. Our AI mimics actual Talent
-                Management Systems to ensure 100% readability and keyword
-                relevance.
-              </p>
-            </div>
-
-            <div className='rounded-2xl border border-border bg-card p-8'>
-              <div className='mb-6 w-fit rounded-xl bg-primary/10 p-3'>
-                <Eye className='size-5 text-primary' />
-              </div>
-              <h3 className='mb-3 text-xl font-bold'>
-                Psychological Hierarchy
+          {/* Precision Typography Card */}
+          <div className='flex flex-col items-start justify-between gap-6 rounded-[2rem] border border-border bg-card p-8 shadow-sm md:col-span-2 md:flex-row md:items-center'>
+            <div className='max-w-[200px]'>
+              <h3 className='mb-2 text-sm font-bold text-foreground'>
+                Precision Typography
               </h3>
-              <p className='text-sm leading-relaxed text-muted-foreground'>
-                Design follows behavior. We leverage natural F-pattern
-                eye-tracking studies to anchor your skills where eyes linger
-                longest.
+              <p className='text-[11px] leading-relaxed text-muted-foreground'>
+                Custom-paired fonts optimized for both digital screen rendering
+                and high-resolution printing.
               </p>
+            </div>
+            <div className='flex gap-3'>
+              <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary font-serif text-xl tracking-tight text-foreground'>
+                Aa
+              </div>
+              <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-muted font-sans text-xl tracking-tight text-foreground'>
+                Aa
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Split section - Curated by intelligence */}
-      <section className='py-20'>
-        <div className='mx-auto grid max-w-7xl items-center gap-20 px-8 lg:grid-cols-2'>
-          <div className='relative flex min-h-[500px] items-center justify-center overflow-hidden rounded-[2rem] bg-secondary p-12'>
-            {/* A mocked up resume paper */}
-            <div className='relative z-0 h-[400px] w-[280px] -rotate-2 transform rounded bg-card p-8 shadow-2xl'>
-              {/* Fake avatar & header */}
-              <div className='mb-6 flex items-center gap-4'>
-                <div className='size-12 rounded-full bg-red-400'></div>
-                <div>
-                  <div className='mb-2 h-3 w-24 rounded bg-surface-container-highest'></div>
-                  <div className='h-1.5 w-16 rounded bg-surface-container-high'></div>
-                </div>
+      {/* Real-time Optimization */}
+      <section className='mx-auto flex max-w-7xl flex-col items-center justify-between gap-20 px-8 py-24 md:flex-row'>
+        <div className='flex-1 space-y-6'>
+          <h2 className='text-4xl font-extrabold text-foreground'>
+            Real-time Optimization
+          </h2>
+          <p className='max-w-sm text-xs leading-relaxed text-muted-foreground'>
+            Watch your resume strengthen as you type. Our real-time scoring
+            engine evaluates impact, quantitative data, and professional
+            clarity.
+          </p>
+          <ul className='space-y-4 pt-4'>
+            <li className='flex items-center gap-3 text-xs font-semibold text-foreground'>
+              <div className='rounded-full bg-primary p-0.5 text-primary-foreground'>
+                <CheckCircle2 className='size-3 stroke-[3]' />
               </div>
-              {/* Fake body lines */}
-              <div className='space-y-4'>
-                <div className='flex items-start gap-3'>
-                  <div className='mt-0.5 size-3 shrink-0 rounded-full bg-amber-400'></div>
-                  <div className='flex-1 space-y-2'>
-                    <div className='h-1.5 w-full rounded bg-surface-container-high'></div>
-                    <div className='h-1.5 w-5/6 rounded bg-surface-container-high'></div>
-                    <div className='h-1.5 w-4/6 rounded bg-surface-container-high'></div>
-                  </div>
-                </div>
-                <div className='flex items-start gap-3'>
-                  <div className='mt-0.5 size-3 shrink-0 rounded-full bg-amber-400'></div>
-                  <div className='flex-1 space-y-2'>
-                    <div className='h-1.5 w-full rounded bg-surface-container-high'></div>
-                    <div className='h-1.5 w-5/6 rounded bg-surface-container-high'></div>
-                  </div>
-                </div>
-                <div className='flex items-start gap-3'>
-                  <div className='mt-0.5 size-3 shrink-0 rounded-full bg-orange-500'></div>
-                  <div className='flex-1 space-y-2'>
-                    <div className='h-1.5 w-full rounded bg-surface-container-high'></div>
-                    <div className='h-1.5 w-3/4 rounded bg-surface-container-high'></div>
-                  </div>
-                </div>
+              Action Verb Optimization
+            </li>
+            <li className='flex items-center gap-3 text-xs font-semibold text-foreground'>
+              <div className='rounded-full bg-primary p-0.5 text-primary-foreground'>
+                <CheckCircle2 className='size-3 stroke-[3]' />
               </div>
-            </div>
+              Impact Quantification Analysis
+            </li>
+            <li className='flex items-center gap-3 text-xs font-semibold text-foreground'>
+              <div className='rounded-full bg-primary p-0.5 text-primary-foreground'>
+                <CheckCircle2 className='size-3 stroke-[3]' />
+              </div>
+              Keyword Density Checks
+            </li>
+          </ul>
+        </div>
 
-            {/* Tooltip floating over it */}
-            <div className='absolute right-12 bottom-12 z-10 max-w-[280px] rounded-2xl border border-border bg-surface-container-low/95 p-5 shadow-2xl backdrop-blur-sm md:-right-8 lg:-right-4 xl:right-12'>
-              <div className='mb-3 flex items-center gap-3'>
-                <div className='rounded-full bg-primary/20 p-1.5'>
-                  <CheckCircle2 className='size-4 text-primary' />
-                </div>
-                <span className='text-sm font-bold text-foreground'>
-                  Certified Layout
-                </span>
+        {/* Progress Gauge */}
+        <div className='relative flex size-64 shrink-0 items-center justify-end md:mr-10'>
+          <div className='relative flex size-[14rem] items-center justify-center'>
+            <svg
+              className='absolute inset-0 size-full rotate-[-90deg]'
+              viewBox='0 0 100 100'
+            >
+              <circle
+                cx='50'
+                cy='50'
+                r='45'
+                fill='none'
+                className='stroke-muted'
+                strokeWidth='8'
+              />
+              <circle
+                cx='50'
+                cy='50'
+                r='45'
+                fill='none'
+                className='stroke-primary'
+                strokeWidth='8'
+                strokeDasharray='283'
+                strokeDashoffset='42'
+                strokeLinecap='round'
+              />
+            </svg>
+
+            <div className='absolute top-3 right-6 size-3 rounded-full bg-primary shadow-sm ring-4 ring-background'></div>
+
+            <div className='z-10 text-center'>
+              <div className='text-5xl font-black text-foreground'>85</div>
+              <div className='mt-1 text-[8px] font-bold tracking-widest text-muted-foreground uppercase'>
+                Mastery Score
               </div>
-              <p className='text-xs leading-relaxed text-muted-foreground italic'>
-                "The format of this document was the first thing the hiring
-                manager complimented during my interview at Stripe."
-              </p>
             </div>
           </div>
 
-          <div className='space-y-8'>
-            <h2 className='text-4xl leading-[1.1] font-extrabold md:text-5xl'>
-              Your story,
-              <br />
-              <span className='text-primary'>curated by intelligence.</span>
-            </h2>
-            <div className='space-y-6 pt-4'>
-              <div className='flex gap-4'>
-                <div className='mt-1 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary p-0.5 text-primary-foreground'>
-                  <Check className='size-3 stroke-[3]' />
-                </div>
-                <div>
-                  <h4 className='mb-1 text-base font-bold text-foreground'>
-                    Dynamic tailoring
-                  </h4>
-                  <p className='text-sm leading-relaxed text-muted-foreground'>
-                    One resume for every application. Our AI re-prioritizes your
-                    achievements based on the specific job description.
-                  </p>
-                </div>
-              </div>
-              <div className='flex gap-4'>
-                <div className='mt-1 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary p-0.5 text-primary-foreground'>
-                  <Check className='size-3 stroke-[3]' />
-                </div>
-                <div>
-                  <h4 className='mb-1 text-base font-bold text-foreground'>
-                    Impact-first phrasing
-                  </h4>
-                  <p className='text-sm leading-relaxed text-muted-foreground'>
-                    Transform passive responsibilities into outcome-driven
-                    accomplishments using industry-standard verbs.
-                  </p>
-                </div>
-              </div>
+          {/* AI badge */}
+          <div className='absolute -top-4 right-8 z-20 flex items-center gap-1 rounded-full border border-border bg-card px-3 py-1.5 shadow-sm'>
+            <div className='flex size-3 items-center justify-center rounded bg-primary text-primary-foreground'>
+              <Cpu className='size-2' />
             </div>
+            <span className='text-[8px] font-bold tracking-widest text-foreground uppercase'>
+              AI Recommended
+            </span>
           </div>
         </div>
       </section>
 
       {/* Pre-footer CTA */}
-      <section className='relative overflow-hidden py-32'>
-        <div className='relative z-10 mx-auto max-w-4xl rounded-[2rem] border border-border bg-card px-8 py-20 text-center'>
-          <h2 className='mb-6 text-4xl font-extrabold md:text-5xl'>
-            Your next chapter deserves <br />
-            superior craftsmanship.
+      <section className='px-8 py-32'>
+        <div className='mx-auto flex max-w-4xl flex-col items-center justify-center rounded-[2.5rem] bg-foreground px-8 py-20 text-center text-background shadow-2xl'>
+          <h2 className='text-3xl leading-tight font-extrabold md:text-5xl'>
+            Your next chapter deserves <br /> superior craftsmanship.
           </h2>
-          <p className='mb-10 text-lg text-muted-foreground'>
-            Join 50,000+ professionals who stopped settling for templates and{' '}
-            <br className='hidden md:block' />
-            started using precision architecture.
+          <p className='mt-6 text-sm text-background/70'>
+            Don't leave your professional narrative to chance. Deploy a bespoke
+            strategy <br className='hidden md:block' /> designed by the Digital
+            Tailor.
           </p>
           <Button
             asChild
-            className='h-14 rounded bg-primary px-10 text-base font-bold text-primary-foreground shadow-ambient hover:bg-primary/90'
+            className='mt-10 h-14 rounded bg-primary px-10 text-sm font-bold text-primary-foreground shadow-ambient hover:bg-primary/90'
           >
             <Link to='/sign-in' search={(prev) => ({ ...prev, intent: 'new' })}>
               Start Building Free
             </Link>
           </Button>
-          <p className='mt-8 text-[10px] font-bold tracking-[0.2em] text-muted-foreground uppercase'>
-            NO CREDIT CARD REQUIRED • PRECISION GUARANTEED
-          </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className='border-t border-border py-12 bg-background'>
-        <div className='mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-8 md:flex-row'>
-          <div className='flex flex-col gap-4 text-center md:text-left'>
-            <div className='flex items-center justify-center gap-2 font-bold md:justify-start'>
-              <div className='text-primary'>
-                <FileText className='size-4' />
+      <footer className='border-t border-border bg-background py-16'>
+        <div className='mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 px-8 md:flex-row md:items-end'>
+          <div className='flex flex-col gap-4'>
+            <div className='flex items-center gap-2 font-bold'>
+              <div className='flex text-primary'>
+                <span className='text-lg'>▲</span>
               </div>
-              <span className='text-sm text-foreground'>The Digital Tailor</span>
+              <span className='text-sm text-foreground'>
+                The Digital Tailor
+              </span>
             </div>
-            <p className='text-[9px] font-bold tracking-widest text-muted-foreground uppercase'>
-              © 2024 THE DIGITAL TAILOR. CRAFTED FOR PRECISION.
+            <p className='text-[10px] leading-relaxed text-muted-foreground'>
+              Precision in every pixel. Elevating careers <br /> through
+              strategic design and AI intelligence.
             </p>
           </div>
 
-          <div className='mx-auto flex gap-8 text-[10px] font-bold tracking-widest text-muted-foreground uppercase md:mx-0'>
+          <div className='flex gap-8 text-[10px] tracking-wide text-muted-foreground uppercase'>
+            <a href='#' className='transition-colors hover:text-foreground'>
+              Career Advice
+            </a>
             <a href='#' className='transition-colors hover:text-foreground'>
               Privacy Policy
             </a>
@@ -404,22 +419,17 @@ function LandingPage() {
               Terms of Service
             </a>
             <a href='#' className='transition-colors hover:text-foreground'>
-              Cookie Policy
-            </a>
-          </div>
-
-          <div className='flex items-center justify-center gap-4 text-muted-foreground md:justify-end'>
-            <a href='#' className='transition-colors hover:text-foreground'>
-              {/* <Dribbble className='size-5' /> */}
-            </a>
-            <a href='#' className='transition-colors hover:text-foreground'>
-              <Twitter className='flex size-5 rounded bg-muted-foreground/20 p-1 text-inherit' />
+              Contact Support
             </a>
           </div>
         </div>
+        <div className='mx-auto mt-12 max-w-7xl px-8 text-center md:text-left'>
+          <p className='text-[9px] tracking-widest text-muted-foreground/60 uppercase'>
+            © 2024 The Digital Tailor. Precision in every pixel.
+          </p>
+        </div>
       </footer>
 
-      {/* Upload Modal */}
       <UploadModal
         open={isUploadModalOpen}
         onOpenChange={setIsUploadModalOpen}
