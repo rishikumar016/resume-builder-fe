@@ -1,3 +1,4 @@
+import { FileText } from 'lucide-react'
 import { useLayout } from '@/context/layout-provider'
 import {
   Sidebar,
@@ -5,20 +6,24 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  useSidebar,
 } from '@/components/ui/sidebar'
-// import { AppTitle } from './app-title'
 import { sidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
 import { NavUser } from './nav-user'
-import { TeamSwitcher } from './team-switcher'
 
 export function AppSidebar() {
+  const { state } = useSidebar()
   const { collapsible, variant } = useLayout()
   return (
     <Sidebar collapsible={collapsible} variant={variant}>
       <SidebarHeader>
-        <TeamSwitcher teams={sidebarData.teams} />
-        title
+        <div className='flex items-center gap-2 font-manrope text-xl font-bold'>
+          <div className='rounded-lg bg-[linear-gradient(to_right,var(--color-tertiary-container),var(--color-primary))] p-2 text-white'>
+            <FileText className='size-5' />
+          </div>
+          {state === 'expanded' && <span>Synthetix</span>}
+        </div>
       </SidebarHeader>
       <SidebarContent>
         {sidebarData.navGroups.map((props) => (
