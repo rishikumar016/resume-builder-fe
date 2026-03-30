@@ -11,6 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedTemplatesRouteImport } from './routes/_authenticated/templates'
+import { Route as AuthenticatedTailoringRouteImport } from './routes/_authenticated/tailoring'
+import { Route as AuthenticatedProcessingRouteImport } from './routes/_authenticated/processing'
+import { Route as AuthenticatedPersonalizationRouteImport } from './routes/_authenticated/personalization'
+import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedLatexEditorRouteImport } from './routes/_authenticated/latex-editor'
+import { Route as AuthenticatedEditorRouteImport } from './routes/_authenticated/editor'
 import { Route as errors503RouteImport } from './routes/(errors)/503'
 import { Route as errors500RouteImport } from './routes/(errors)/500'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
@@ -21,12 +28,8 @@ import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
-import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
-import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
-import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
-import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
 import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
@@ -40,6 +43,43 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTemplatesRoute = AuthenticatedTemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTailoringRoute = AuthenticatedTailoringRouteImport.update({
+  id: '/tailoring',
+  path: '/tailoring',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProcessingRoute = AuthenticatedProcessingRouteImport.update({
+  id: '/processing',
+  path: '/processing',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPersonalizationRoute =
+  AuthenticatedPersonalizationRouteImport.update({
+    id: '/personalization',
+    path: '/personalization',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedLatexEditorRoute =
+  AuthenticatedLatexEditorRouteImport.update({
+    id: '/latex-editor',
+    path: '/latex-editor',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedEditorRoute = AuthenticatedEditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const errors503Route = errors503RouteImport.update({
@@ -93,16 +133,6 @@ const AuthenticatedSettingsRouteRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
-  id: '/users/',
-  path: '/users/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
-  id: '/tasks/',
-  path: '/tasks/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedSettingsIndexRoute =
   AuthenticatedSettingsIndexRouteImport.update({
     id: '/',
@@ -115,16 +145,6 @@ const AuthenticatedHelpCenterIndexRoute =
     path: '/help-center/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
-  id: '/chats/',
-  path: '/chats/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexRouteImport.update({
-  id: '/apps/',
-  path: '/apps/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedSettingsNotificationsRoute =
   AuthenticatedSettingsNotificationsRouteImport.update({
     id: '/notifications',
@@ -168,17 +188,20 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
+  '/editor': typeof AuthenticatedEditorRoute
+  '/latex-editor': typeof AuthenticatedLatexEditorRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/personalization': typeof AuthenticatedPersonalizationRoute
+  '/processing': typeof AuthenticatedProcessingRoute
+  '/tailoring': typeof AuthenticatedTailoringRoute
+  '/templates': typeof AuthenticatedTemplatesRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/apps/': typeof AuthenticatedAppsIndexRoute
-  '/chats/': typeof AuthenticatedChatsIndexRoute
   '/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/tasks/': typeof AuthenticatedTasksIndexRoute
-  '/users/': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/forgot-password': typeof authForgotPasswordRoute
@@ -190,18 +213,21 @@ export interface FileRoutesByTo {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
+  '/editor': typeof AuthenticatedEditorRoute
+  '/latex-editor': typeof AuthenticatedLatexEditorRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/personalization': typeof AuthenticatedPersonalizationRoute
+  '/processing': typeof AuthenticatedProcessingRoute
+  '/tailoring': typeof AuthenticatedTailoringRoute
+  '/templates': typeof AuthenticatedTemplatesRoute
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/apps': typeof AuthenticatedAppsIndexRoute
-  '/chats': typeof AuthenticatedChatsIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
-  '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -216,18 +242,21 @@ export interface FileRoutesById {
   '/(errors)/404': typeof errors404Route
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
+  '/_authenticated/editor': typeof AuthenticatedEditorRoute
+  '/_authenticated/latex-editor': typeof AuthenticatedLatexEditorRoute
+  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/personalization': typeof AuthenticatedPersonalizationRoute
+  '/_authenticated/processing': typeof AuthenticatedProcessingRoute
+  '/_authenticated/tailoring': typeof AuthenticatedTailoringRoute
+  '/_authenticated/templates': typeof AuthenticatedTemplatesRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
-  '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
-  '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -243,17 +272,20 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
+    | '/editor'
+    | '/latex-editor'
+    | '/onboarding'
+    | '/personalization'
+    | '/processing'
+    | '/tailoring'
+    | '/templates'
     | '/errors/$error'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
-    | '/apps/'
-    | '/chats/'
     | '/help-center/'
     | '/settings/'
-    | '/tasks/'
-    | '/users/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/forgot-password'
@@ -265,18 +297,21 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
+    | '/editor'
+    | '/latex-editor'
+    | '/onboarding'
+    | '/personalization'
+    | '/processing'
+    | '/tailoring'
+    | '/templates'
     | '/'
     | '/errors/$error'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
-    | '/apps'
-    | '/chats'
     | '/help-center'
     | '/settings'
-    | '/tasks'
-    | '/users'
   id:
     | '__root__'
     | '/_authenticated'
@@ -290,18 +325,21 @@ export interface FileRouteTypes {
     | '/(errors)/404'
     | '/(errors)/500'
     | '/(errors)/503'
+    | '/_authenticated/editor'
+    | '/_authenticated/latex-editor'
+    | '/_authenticated/onboarding'
+    | '/_authenticated/personalization'
+    | '/_authenticated/processing'
+    | '/_authenticated/tailoring'
+    | '/_authenticated/templates'
     | '/_authenticated/'
     | '/_authenticated/errors/$error'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
     | '/_authenticated/settings/notifications'
-    | '/_authenticated/apps/'
-    | '/_authenticated/chats/'
     | '/_authenticated/help-center/'
     | '/_authenticated/settings/'
-    | '/_authenticated/tasks/'
-    | '/_authenticated/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -331,6 +369,55 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/templates': {
+      id: '/_authenticated/templates'
+      path: '/templates'
+      fullPath: '/templates'
+      preLoaderRoute: typeof AuthenticatedTemplatesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tailoring': {
+      id: '/_authenticated/tailoring'
+      path: '/tailoring'
+      fullPath: '/tailoring'
+      preLoaderRoute: typeof AuthenticatedTailoringRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/processing': {
+      id: '/_authenticated/processing'
+      path: '/processing'
+      fullPath: '/processing'
+      preLoaderRoute: typeof AuthenticatedProcessingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/personalization': {
+      id: '/_authenticated/personalization'
+      path: '/personalization'
+      fullPath: '/personalization'
+      preLoaderRoute: typeof AuthenticatedPersonalizationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/latex-editor': {
+      id: '/_authenticated/latex-editor'
+      path: '/latex-editor'
+      fullPath: '/latex-editor'
+      preLoaderRoute: typeof AuthenticatedLatexEditorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/editor': {
+      id: '/_authenticated/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof AuthenticatedEditorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/(errors)/503': {
@@ -403,20 +490,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/users/': {
-      id: '/_authenticated/users/'
-      path: '/users'
-      fullPath: '/users/'
-      preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/tasks/': {
-      id: '/_authenticated/tasks/'
-      path: '/tasks'
-      fullPath: '/tasks/'
-      preLoaderRoute: typeof AuthenticatedTasksIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/settings/': {
       id: '/_authenticated/settings/'
       path: '/'
@@ -429,20 +502,6 @@ declare module '@tanstack/react-router' {
       path: '/help-center'
       fullPath: '/help-center/'
       preLoaderRoute: typeof AuthenticatedHelpCenterIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/chats/': {
-      id: '/_authenticated/chats/'
-      path: '/chats'
-      fullPath: '/chats/'
-      preLoaderRoute: typeof AuthenticatedChatsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/apps/': {
-      id: '/_authenticated/apps/'
-      path: '/apps'
-      fullPath: '/apps/'
-      preLoaderRoute: typeof AuthenticatedAppsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/settings/notifications': {
@@ -508,24 +567,30 @@ const AuthenticatedSettingsRouteRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
+  AuthenticatedEditorRoute: typeof AuthenticatedEditorRoute
+  AuthenticatedLatexEditorRoute: typeof AuthenticatedLatexEditorRoute
+  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedPersonalizationRoute: typeof AuthenticatedPersonalizationRoute
+  AuthenticatedProcessingRoute: typeof AuthenticatedProcessingRoute
+  AuthenticatedTailoringRoute: typeof AuthenticatedTailoringRoute
+  AuthenticatedTemplatesRoute: typeof AuthenticatedTemplatesRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
-  AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
-  AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
-  AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
-  AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
+  AuthenticatedEditorRoute: AuthenticatedEditorRoute,
+  AuthenticatedLatexEditorRoute: AuthenticatedLatexEditorRoute,
+  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedPersonalizationRoute: AuthenticatedPersonalizationRoute,
+  AuthenticatedProcessingRoute: AuthenticatedProcessingRoute,
+  AuthenticatedTailoringRoute: AuthenticatedTailoringRoute,
+  AuthenticatedTemplatesRoute: AuthenticatedTemplatesRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
-  AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
-  AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
-  AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
-  AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
