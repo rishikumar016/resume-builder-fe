@@ -17,6 +17,8 @@ import { Route as AuthenticatedProcessingRouteImport } from './routes/_authentic
 import { Route as AuthenticatedPersonalizationRouteImport } from './routes/_authenticated/personalization'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedLatexEditorRouteImport } from './routes/_authenticated/latex-editor'
+import { Route as AuthenticatedJobsRouteImport } from './routes/_authenticated/jobs'
+import { Route as AuthenticatedInterviewPrepRouteImport } from './routes/_authenticated/interview-prep'
 import { Route as AuthenticatedEditorRouteImport } from './routes/_authenticated/editor'
 import { Route as errors503RouteImport } from './routes/(errors)/503'
 import { Route as errors500RouteImport } from './routes/(errors)/500'
@@ -75,6 +77,17 @@ const AuthenticatedLatexEditorRoute =
   AuthenticatedLatexEditorRouteImport.update({
     id: '/latex-editor',
     path: '/latex-editor',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedJobsRoute = AuthenticatedJobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedInterviewPrepRoute =
+  AuthenticatedInterviewPrepRouteImport.update({
+    id: '/interview-prep',
+    path: '/interview-prep',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedEditorRoute = AuthenticatedEditorRouteImport.update({
@@ -189,6 +202,8 @@ export interface FileRoutesByFullPath {
   '/500': typeof errors500Route
   '/503': typeof errors503Route
   '/editor': typeof AuthenticatedEditorRoute
+  '/interview-prep': typeof AuthenticatedInterviewPrepRoute
+  '/jobs': typeof AuthenticatedJobsRoute
   '/latex-editor': typeof AuthenticatedLatexEditorRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/personalization': typeof AuthenticatedPersonalizationRoute
@@ -214,6 +229,8 @@ export interface FileRoutesByTo {
   '/500': typeof errors500Route
   '/503': typeof errors503Route
   '/editor': typeof AuthenticatedEditorRoute
+  '/interview-prep': typeof AuthenticatedInterviewPrepRoute
+  '/jobs': typeof AuthenticatedJobsRoute
   '/latex-editor': typeof AuthenticatedLatexEditorRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/personalization': typeof AuthenticatedPersonalizationRoute
@@ -243,6 +260,8 @@ export interface FileRoutesById {
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
   '/_authenticated/editor': typeof AuthenticatedEditorRoute
+  '/_authenticated/interview-prep': typeof AuthenticatedInterviewPrepRoute
+  '/_authenticated/jobs': typeof AuthenticatedJobsRoute
   '/_authenticated/latex-editor': typeof AuthenticatedLatexEditorRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/personalization': typeof AuthenticatedPersonalizationRoute
@@ -273,6 +292,8 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/editor'
+    | '/interview-prep'
+    | '/jobs'
     | '/latex-editor'
     | '/onboarding'
     | '/personalization'
@@ -298,6 +319,8 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/editor'
+    | '/interview-prep'
+    | '/jobs'
     | '/latex-editor'
     | '/onboarding'
     | '/personalization'
@@ -326,6 +349,8 @@ export interface FileRouteTypes {
     | '/(errors)/500'
     | '/(errors)/503'
     | '/_authenticated/editor'
+    | '/_authenticated/interview-prep'
+    | '/_authenticated/jobs'
     | '/_authenticated/latex-editor'
     | '/_authenticated/onboarding'
     | '/_authenticated/personalization'
@@ -411,6 +436,20 @@ declare module '@tanstack/react-router' {
       path: '/latex-editor'
       fullPath: '/latex-editor'
       preLoaderRoute: typeof AuthenticatedLatexEditorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/jobs': {
+      id: '/_authenticated/jobs'
+      path: '/jobs'
+      fullPath: '/jobs'
+      preLoaderRoute: typeof AuthenticatedJobsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/interview-prep': {
+      id: '/_authenticated/interview-prep'
+      path: '/interview-prep'
+      fullPath: '/interview-prep'
+      preLoaderRoute: typeof AuthenticatedInterviewPrepRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/editor': {
@@ -568,6 +607,8 @@ const AuthenticatedSettingsRouteRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedEditorRoute: typeof AuthenticatedEditorRoute
+  AuthenticatedInterviewPrepRoute: typeof AuthenticatedInterviewPrepRoute
+  AuthenticatedJobsRoute: typeof AuthenticatedJobsRoute
   AuthenticatedLatexEditorRoute: typeof AuthenticatedLatexEditorRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedPersonalizationRoute: typeof AuthenticatedPersonalizationRoute
@@ -582,6 +623,8 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedEditorRoute: AuthenticatedEditorRoute,
+  AuthenticatedInterviewPrepRoute: AuthenticatedInterviewPrepRoute,
+  AuthenticatedJobsRoute: AuthenticatedJobsRoute,
   AuthenticatedLatexEditorRoute: AuthenticatedLatexEditorRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedPersonalizationRoute: AuthenticatedPersonalizationRoute,

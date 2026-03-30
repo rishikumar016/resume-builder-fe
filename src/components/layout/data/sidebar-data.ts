@@ -3,26 +3,25 @@ import {
   LayoutDashboard,
   Monitor,
   Bug,
-  ListTodo,
   FileX,
   HelpCircle,
   Lock,
   Bell,
-  Package,
   Palette,
   ServerOff,
   Settings,
   Wrench,
   UserCog,
   UserX,
-  Users,
   MessagesSquare,
   ShieldCheck,
   AudioWaveform,
   Command,
   GalleryVerticalEnd,
+  FileUser,
+  BriefcaseBusiness,
+  UsersRound,
 } from 'lucide-react'
-import { ClerkLogo } from '@/assets/clerk-logo'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -57,41 +56,21 @@ export const sidebarData: SidebarData = {
           url: '/',
           icon: LayoutDashboard,
         },
+
         {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: ListTodo,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: Package,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: MessagesSquare,
-        },
-        {
-          title: 'Users',
-          url: '/users',
-          icon: Users,
-        },
-        {
-          title: 'Secured by Clerk',
-          icon: ClerkLogo,
+          title: 'Resume',
+          icon: FileUser,
           items: [
             {
-              title: 'Sign In',
+              title: 'My Resume',
               url: '/clerk/sign-in',
             },
             {
-              title: 'Sign Up',
+              title: 'Create Resume',
               url: '/clerk/sign-up',
             },
             {
-              title: 'User Management',
+              title: 'Templates',
               url: '/clerk/user-management',
             },
           ],
@@ -102,30 +81,14 @@ export const sidebarData: SidebarData = {
       title: 'Pages',
       items: [
         {
-          title: 'Auth',
-          icon: ShieldCheck,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/sign-in',
-            },
-            {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
-            },
-            {
-              title: 'Sign Up',
-              url: '/sign-up',
-            },
-            {
-              title: 'Forgot Password',
-              url: '/forgot-password',
-            },
-            {
-              title: 'OTP',
-              url: '/otp',
-            },
-          ],
+          title: 'Jobs',
+          url: '/jobs',
+          icon: BriefcaseBusiness,
+        },
+        {
+          title: 'Interview prep',
+          url: '/interview-prep',
+          icon: UsersRound,
         },
         {
           title: 'Errors',
