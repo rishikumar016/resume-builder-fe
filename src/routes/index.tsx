@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { FileText, Cpu, Eye, CheckCircle2, Sparkles } from 'lucide-react'
+import { FileText, Cpu, CheckCircle2, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { UploadModal } from '@/components/upload-modal'
 
